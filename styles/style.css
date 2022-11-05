@@ -11,6 +11,7 @@ body {
     flex-direction: row;
     color: white;
     margin: 0.4vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 p {
@@ -20,6 +21,10 @@ p {
 .title {
     margin: 1vw;
     padding-left: 3vw;
+    position: absolute;
+    cursor: default;
+    /*text-shadow: 5px 5px 5px #0d1117;*/
+    text-shadow: 3px 3px 10px #0d1117;
 }
 
 h2, h3 {
@@ -30,8 +35,11 @@ h2, h3 {
 }
 
 h4 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
     margin-top: 3px;
-    margin-bottom: 3px;;
+    margin-bottom: 3px;
+    position: absolute;
 }
 
 .menu {
@@ -40,15 +48,19 @@ h4 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     justify-content: center;
-    margin-bottom: 3vh;
+    margin-top: 3vh;
+    cursor: default;
 }
 
 .freq-menu {
     justify-content: left;
 }
 
+.spectrum-menu {
+    position: absolute;
+}
+
 .menu-box {
-    margin-right: 5vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
 }
@@ -72,5 +84,16 @@ h4 {
 
 .argand {
     margin-top: 40px;
+}
+
+.sign {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    font-size: 40px;
+    color:#d3d3d3;
+}
+
+h1 {
+    margin: 0;
 }
 
