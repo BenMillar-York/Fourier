@@ -34,7 +34,7 @@ class SineWave extends Wave {
         let amplitude = this.amplitude;
         let omega = 2*Math.PI*this.frequency/width;
         let phase = this.phase;
-        return amplitude * Math.cos(omega*time-phase);
+        return  amplitude * Math.cos(omega*time-phase) + amplitude * Math.cos(2*omega*time) + amplitude * Math.cos(3*omega*time);
     }
 }
 

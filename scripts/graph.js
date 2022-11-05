@@ -37,6 +37,7 @@ function plotFunction(ctx, wave) {
 
 }
 
+let sampleData = [];
 function drawSamplingPoints(ctx, wave, sampleFrequency){
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
@@ -46,29 +47,24 @@ function drawSamplingPoints(ctx, wave, sampleFrequency){
     
     var y = 0;
 
-    sampleRate = width/sampleFrequency
+    let sampleRate = width/sampleFrequency;
+
+    sampleData = [];
     
     for (let x = -width/2; x < width; x+= sampleRate) {
-        ctx.beginPath();
 
-        y = - wave.getPositionAtTime(x, width) + (height/2);
+        let waveAmplitude = wave.getPositionAtTime(x, width)
+        let wavePosition = (x-width/2)
+        y = - waveAmplitude + (height/2);
 
-        ctx.moveTo(x, y);
-
-        ctx.lineTo(x + 3, y + 3);
-        ctx.lineTo(x - 3, y - 3);
-        ctx.moveTo(x, y);
-        ctx.lineTo(x - 3, y + 3);
-        ctx.lineTo(x + 3, y - 3);
-        ctx.stroke();
-        ctx.save();
+        sample = y;
+        sampleData.push(sample);
+        drawCross(ctx, x, y);
         
     }
-   
-    
 }
 
-function update() {
+function updateTimeGraph() {
 
     var canvas = document.getElementById("canvas");
     document.getElementById("canvas").width = window.innerWidth;
@@ -82,16 +78,65 @@ function update() {
 
     wave1 = new SineWave(50, 20, 0);
     plotFunction(context, wave1);
+    fourierData = dft()
 
     let sampleFrequency = document.getElementById("sample-frequency-slider").value;
     drawSamplingPoints(context, wave1, sampleFrequency);
 
     context.restore();
     
-    window.requestAnimationFrame(update);
+    window.requestAnimationFrame(updateTimeGraph);
+}
+
+function drawCross(ctx, x, y) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 3, y + 3);
+    ctx.lineTo(x - 3, y - 3);
+    ctx.moveTo(x, y);
+    ctx.lineTo(x - 3, y + 3);
+    ctx.lineTo(x + 3, y - 3);
+    ctx.stroke();
+    ctx.save();
+}
+
+function plotPoints(ctx, data) {
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#FF00FF";
+    
+    for (let i = 0; i < data.length; i++) {
+        
+        let pointAmplitude = data[i].real;
+        
+        let x = i * width/data.length;
+        let y = pointAmplitude + (height/2);
+        drawCross(ctx, x, y);
+    }
+}
+
+function updateFrequencyGraph() {
+    var canvas = document.getElementById("fourier");
+    document.getElementById("fourier").width = window.innerWidth;
+    document.getElementById("fourier").height = window.innerHeight/3;
+
+    var context = canvas.getContext("2d");
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawAxes(context);
+    context.save();
+
+    plotPoints(context, fourierData);
+
+    context.restore();
+    
+    window.requestAnimationFrame(updateFrequencyGraph);
 }
 
 
 function init() {
-    window.requestAnimationFrame(update);
+    window.requestAnimationFrame(updateTimeGraph);
+    window.requestAnimationFrame(updateFrequencyGraph);
 }
