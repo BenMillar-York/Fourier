@@ -3,7 +3,7 @@
 
 ![Waveform](img/transform.png)
 
-View the simulation [here](https://benmillar-york.github.io/Individual-Project/).
+View the simulation [here](https://benmillar-york.github.io/Fourier/).
 
 This demo a prototype of applying a Discrete Fourier Transform to a sum of sineusodial waves.
 
