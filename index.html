@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="scripts/graph.js"></script>
+    <script defer src="scripts/wave.js"></script>
+    <script defer src="scripts/complex.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/checkbox.css">
+    <link rel="stylesheet" href="styles/slider.css">
+    <link rel="stylesheet" href="styles/radio.css">
+    <title>Fourier</title>
+    <link rel="icon" type="image/png" href="https://www.york.ac.uk/static/stable/img/favicons/android-chrome-192x192.png"/>
+</head>
+<body onload="init()">
+    <div class="title"><h2>Fourier Prototype</h2></div>
+    <canvas id="canvas"></canvas>
+    <div class="title"><h2>Sample Frequency</h2></div>
+    <div class="input-menu">
+        <input type="range" min="0" max="300" value="50" class="slider sampleSlider" id="sample-frequency-slider" style="margin-left: 3%;">
+    </div>
+</body>
+</html>

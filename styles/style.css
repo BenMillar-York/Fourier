@@ -1,0 +1,63 @@
+body {
+    background-color: #0d1117;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-menu {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    margin: 0.4vh;
+}
+
+p {
+    margin: 0px;
+}
+
+.title {
+    padding-left: 3vw;
+}
+
+h2, h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    margin-bottom: 5px;
+}
+
+h4 {
+    margin-top: 3px;
+    margin-bottom: 3px;;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white
+}
+
+.lower {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.wave-menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.gui {
+    display: flex;
+    flex-direction: column;
+}
+
+.argand {
+    margin-top: 40px;
+}
+
