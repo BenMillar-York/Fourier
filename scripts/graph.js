@@ -269,8 +269,6 @@ function plotFrequencyPoints2(ctx, data){
     for (let i=0; i < freqArr.length; i++){
         if (largestFreqs.length > 0 && Math.abs(waveArr[waveArr.length-i-1].amplitude) > 3) {
             let xPos = largestFreqs[largestFreqs.length-i-1]/data.length;
-            console.log(largestFreqs)
-            console.log(xPos)
             if (typeof xPos == "" || xPos == NaN) {
                 return;
             }
@@ -289,9 +287,10 @@ function plotFrequencyPoints2(ctx, data){
     ctx.strokeStyle = gradient
 
     
+    i = 0;
     for (let x = -width/2; x < width/2; x+= sampleRate) {
         let pointAmplitude = data[i].real;
-        let y = -Math.abs(pointAmplitude*4) + (height);
+        let y = -Math.abs(pointAmplitude*10) + (height);
         
         if (Math.abs(pointAmplitude) >= noise_thresold) {
             drawArrow(ctx, x+ (width/2), y, y > height, 6);
@@ -301,9 +300,7 @@ function plotFrequencyPoints2(ctx, data){
             ctx.lineTo(x+ (width/2), height);
             ctx.stroke();
         }
-
         i = i + 1;
-        
     }
 }
 
@@ -343,10 +340,10 @@ function init() {
     window.requestAnimationFrame(updateFrequencyGraph);
 
 
-    wave1 = new SineWave(51, 0.0264599, 0, 0, waveColours[0]);
-    wave2 = new SineWave(43, 0.0172932, 0, 0, waveColours[1]);
-    wave3 = new SineWave(0, 0, 0, 0, waveColours[2]);
-    wave4 = new SineWave(0, 0, 0, 0, waveColours[3]);
+    wave1 = new SineWave(78, 0.0148907, 1.304, 0, waveColours[0]);
+    wave2 = new SineWave(98, 0.0113251, 0, 0, waveColours[1]);
+    wave3 = new SineWave(65, 0.0074863, 1.403, 0, waveColours[2]);
+    wave4 = new SineWave(72, 0.0044672, 0, 0, waveColours[3]);
 
     sumWave = new SumWave([wave1, wave2, wave3, wave4]);
 
