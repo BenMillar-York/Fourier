@@ -11,6 +11,11 @@
     transition: opacity .2s;
 }
 
+.sampleSlider {
+    width: 150px;
+    margin-left: 0.3vw;
+}
+
 .Wave1slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -44,6 +49,42 @@
     height: 15px;
     border-radius: 50%;
     background: #38a6ff;
+    cursor: pointer;
+}
+
+.Wave3slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; 
+    background: #a37907;
+    cursor: pointer;
+}
+
+.Wave3slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #a37907;
+    cursor: pointer;
+}
+
+.Wave4slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; 
+    background: #4c32a8;
+    cursor: pointer;
+}
+
+.Wave4slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4c32a8;
     cursor: pointer;
 }
 

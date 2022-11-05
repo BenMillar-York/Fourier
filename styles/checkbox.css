@@ -33,7 +33,7 @@
 }
 
 .checkbox_container input:checked ~ .checkmark {
-    background-color: #EF633F;
+    background-color: #ad3184;
 }
 
 .checkmark:after {

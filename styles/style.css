@@ -18,6 +18,7 @@ p {
 }
 
 .title {
+    margin: 1vw;
     padding-left: 3vw;
 }
 
@@ -25,6 +26,7 @@ h2, h3 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     margin-bottom: 5px;
+    margin-top: 0;
 }
 
 h4 {
@@ -34,10 +36,21 @@ h4 {
 
 .menu {
     display: flex;
-    flex-direction: column;
-    padding-left: 3vw;
+    flex-direction: row;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white
+    color: white;
+    justify-content: center;
+    margin-bottom: 3vh;
+}
+
+.freq-menu {
+    justify-content: left;
+}
+
+.menu-box {
+    margin-right: 5vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 .lower {

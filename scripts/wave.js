@@ -11,10 +11,11 @@ function ceiling(value){
 }
 
 class Wave {
-    constructor(amplitude, frequency, phase) {
+    constructor(amplitude, frequency, phase, colour) {
         this.amplitude = amplitude;
         this.frequency = frequency; // Hz
         this.phase = phase; // Radians
+        this.colour = colour;
     }
 
     getPositionAtTime(time) {
@@ -23,18 +24,18 @@ class Wave {
 }
 
 class SineWave extends Wave {
-    constructor(amplitude, frequency, phase){
-        super(amplitude, frequency, phase);
+    constructor(amplitude, frequency, phase, colour){
+        super(amplitude, frequency, phase, colour);
         this.amplitude = amplitude;
         this.frequency = frequency; // Hz
         this.phase = phase; // Radians
     }
 
-    getPositionAtTime(time, width){
+    getPositionAtTime(time){
         let amplitude = this.amplitude;
-        let omega = 2*Math.PI*this.frequency/width;
+        let omega = 2*Math.PI*this.frequency;
         let phase = this.phase;
-        return  amplitude * Math.cos(omega*time-phase) + amplitude * Math.cos(2*omega*time) + amplitude * Math.cos(3*omega*time);
+        return  amplitude * Math.cos(omega*time-phase);
     }
 }
 
@@ -46,10 +47,24 @@ class SquareWave extends Wave {
         this.phase = phase; // Radians
     }
 
-    getPositionAtTime(time, width){
+    getPositionAtTime(time){
         let amplitude = this.amplitude;
-        let omega = 2*Math.PI*this.frequency/width;
+        let omega = 2*Math.PI*this.frequency;
         let phase = this.phase;
         return amplitude * ceiling(Math.cos(omega*time-phase));
+    }
+}
+
+class SumWave {
+    constructor(waves) {
+        this.waves = waves; 
+    }
+
+    getPositionAtTime(time) {
+        let sum = 0;
+        this.waves.forEach(wave => {
+            sum += wave.getPositionAtTime(time);
+        });
+        return sum;
     }
 }
