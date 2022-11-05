@@ -1,4 +1,4 @@
-# Fourier# Individual-Project
+# Discrete Fourier Transform
 ## DAJP1-9-2022: On-line teaching simulation / visualisation
 
 ![Waveform](img/transform.png)
