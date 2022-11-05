@@ -1,5 +1,5 @@
-const waveColours = ["#238636", '#38a6ff', '#a37907', '#4c32a8']
-let noise_thresold = 10;
+const waveColours = ["#238636", '#38a6ff', '#ff7846', '#4c32a8']
+let noise_thresold = 0;
 
 function drawAxes(ctx, drawLower=true) {
     var width = ctx.canvas.width;
@@ -15,7 +15,7 @@ function drawAxes(ctx, drawLower=true) {
         gradient.addColorStop(0.1, "rgb(128,128,128,0)");
         gradient.addColorStop(0.3, "rgb(128,128,128,255)");
         gradient.addColorStop(0.8, "rgb(128,128,128,255)");
-        gradient.addColorStop(0.9, "rgb(128,128,128,0)");
+        gradient.addColorStop(0.95, "rgb(128,128,128,0)");
         gradient.addColorStop(1, "rgb(128,128,128,0)");
     } else {
         gradient.addColorStop(0, "rgb(128,128,128,0)");
@@ -130,7 +130,7 @@ function updateTimeGraph() {
 
     var canvas = document.getElementById("canvas");
     document.getElementById("canvas").width = window.innerWidth;
-    document.getElementById("canvas").height = window.innerHeight/2;
+    document.getElementById("canvas").height = window.innerHeight/1.9;
 
     var context = canvas.getContext("2d");
 
@@ -153,6 +153,7 @@ function updateTimeGraph() {
     context.restore();
     
     window.requestAnimationFrame(updateTimeGraph);
+    position += 0.03;
 }
 
 function drawCross(ctx, x, y, size) {
@@ -266,7 +267,7 @@ function plotFrequencyPoints2(ctx, data){
 
 
     for (let i=0; i < freqArr.length; i++){
-        if (largestFreqs.length > 0 && Math.abs(waveArr[waveArr.length-i-1].amplitude) > 21) {
+        if (largestFreqs.length > 0 && Math.abs(waveArr[waveArr.length-i-1].amplitude) > 3) {
             let xPos = largestFreqs[largestFreqs.length-i-1]/data.length;
             console.log(largestFreqs)
             console.log(xPos)
@@ -335,15 +336,17 @@ let sumWave;
 
 let addditionalWave;
 
+let position = 0;
+
 function init() {
     window.requestAnimationFrame(updateTimeGraph);
     window.requestAnimationFrame(updateFrequencyGraph);
 
 
-    wave1 = new SineWave(51, 0.0264599, 0, waveColours[0]);
-    wave2 = new SineWave(43, 0.0172932, 0, waveColours[1]);
-    wave3 = new SineWave(0, 0, 0, waveColours[2]);
-    wave4 = new SineWave(0, 0, 0, waveColours[3]);
+    wave1 = new SineWave(51, 0.0264599, 0, 0, waveColours[0]);
+    wave2 = new SineWave(43, 0.0172932, 0, 0, waveColours[1]);
+    wave3 = new SineWave(0, 0, 0, 0, waveColours[2]);
+    wave4 = new SineWave(0, 0, 0, 0, waveColours[3]);
 
     sumWave = new SumWave([wave1, wave2, wave3, wave4]);
 

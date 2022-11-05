@@ -26,6 +26,22 @@
         <div class="menu-box" id="wave1-menu">
             <div style="margin-bottom: 5vh" onmouseover="addditionalWave=wave1" onmouseout="addditionalWave=null">
                 <h3>Wave 1 </h3>
+                <div class="input-menu">
+                    
+                    <label class="radio_container">Stationary
+                        <input autocomplete ="off" type="radio" id="stationary1" name="wave1_direction" value="stationary" class="wave1" onclick="wave1.velocity = 0" checked>
+                        <span class="radiobtn1"></span>
+                    </label>
+
+                    <label class="radio_container">Forward
+                        <input autocomplete ="off" type="radio" id="forward1" name="wave1_direction" value="forward" class="wave1" onclick="wave1.velocity = 1">
+                        <span class="radiobtn1"></span>
+                    </label>
+                    <label class="radio_container">Reverse
+                        <input autocomplete ="off" type="radio" id="Reverse1" name="wave1_direction" value="reverse" class="wave1" onclick="wave1.velocity = -1">
+                        <span class="radiobtn1"></span>
+                    </label>
+                </div>
 
                     <div class="input-menu">
                         <p>Amplitude </p>
@@ -47,7 +63,7 @@
                     <input type="range" autocomplete="off" min="0" max="1000" value="500" class="slider sampleSlider" id="sample-frequency-slider" >
                 </div>
                 <div class="input-menu"><label>Noise Threshold</label>
-                    <input type="range" autocomplete="off" min="0" max="20" value="10" class="slider sampleSlider" id="sample-frequency-slider" oninput="noise_thresold = value">
+                    <input type="range" autocomplete="off" min="0" max="20" value="0" class="slider sampleSlider" id="sample-frequency-slider" oninput="noise_thresold = value">
                 </div>
                 <label  class="input-menu checkbox_container">Display Sample Points
                     <input type="checkbox" id="summation_enabled" name="summation_enabled" value="0" onclick="drawSamples=checked" >
@@ -62,6 +78,23 @@
         <div class="menu-box" id="wave2-menu" >
             <div style="margin-bottom: 5vh" onmouseover="addditionalWave=wave2" onmouseout="addditionalWave=null">
                 <h3>Wave 2 </h3>
+
+                <div class="input-menu">
+                    
+                    <label class="radio_container">Stationary
+                        <input autocomplete ="off" type="radio" id="stationary2" name="wave2_direction" value="stationary" class="wave2" onclick="wave2.velocity = 0" checked>
+                        <span class="radiobtn2"></span>
+                    </label>
+
+                    <label class="radio_container">Forward
+                        <input autocomplete ="off" type="radio" id="forward2" name="wave2_direction" value="forward" class="wave2" onclick="wave2.velocity = 1">
+                        <span class="radiobtn2"></span>
+                    </label>
+                    <label class="radio_container">Reverse
+                        <input autocomplete ="off" type="radio" id="Reverse2" name="wave2_direction" value="reverse" class="wave2" onclick="wave2.velocity = -1">
+                        <span class="radiobtn2"></span>
+                    </label>
+                </div>
 
                     <div class="input-menu">
                         <p>Amplitude </p>
@@ -81,23 +114,57 @@
         <div class="menu-box" id="wave3-menu" onmouseover="addditionalWave=wave3" onmouseout="addditionalWave=null">
             <h3>Wave 3 </h3>
 
+            <div class="input-menu">
+                    
+                <label class="radio_container">Stationary
+                    <input autocomplete ="off" type="radio" id="stationary3" name="wave3_direction" value="stationary" class="wave3" onclick="wave3.velocity = 0" checked>
+                    <span class="radiobtn3"></span>
+                </label>
+
+                <label class="radio_container">Forward
+                    <input autocomplete ="off" type="radio" id="forward3" name="wave3_direction" value="forward" class="wave3" onclick="wave3.velocity = 1">
+                    <span class="radiobtn3"></span>
+                </label>
+                <label class="radio_container">Reverse
+                    <input autocomplete ="off" type="radio" id="reverse3" name="wave3_direction" value="reverse" class="wave3" onclick="wave3.velocity = -1">
+                    <span class="radiobtn3"></span>
+                </label>
+            </div>
+
                 <div class="input-menu">
                     <p>Amplitude </p>
-                    <input type="range" autocomplete="off" min="-200" max="200" value="0" class="slider Wave3slider" id="wave1-amplitude" oninput="wave3.amplitude = value" style="margin-left:10px">
+                    <input type="range" autocomplete="off" min="-200" max="200" value="0" class="slider Wave3slider" id="wave3-amplitude" oninput="wave3.amplitude = value" style="margin-left:10px">
                 </div>
                 <div class="input-menu">
                     <p>Frequency </p>
-                    <input type="range" autocomplete="off" min="0" max="0.05" value="0" step="0.0000001"  class="slider Wave3slider" id="wave1-frequency" oninput="wave3.frequency = value" style="margin-left:10px">
+                    <input type="range" autocomplete="off" min="0" max="0.05" value="0" step="0.0000001"  class="slider Wave3slider" id="wave3-frequency" oninput="wave3.frequency = value" style="margin-left:10px">
                 </div>
                 <div class="input-menu">
                     <p>Phase </p>
-                    <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave3slider" id="wave1-phase" step="0.001" oninput="wave3.phase = value" style="margin-left:43px">
+                    <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave3slider" id="wave3-phase" step="0.001" oninput="wave3.phase = value" style="margin-left:43px">
                 </div>
 
         </div>
         <div class="sign"><h1>+</h1></div>
         <div class="menu-box" id="wave4-menu" onmouseover="addditionalWave=wave4" onmouseout="addditionalWave=null">
             <h3>Wave 4 </h3>
+
+            <div class="input-menu">
+                    
+                <label class="radio_container">Stationary
+                    <input autocomplete ="off" type="radio" id="stationary4" name="wave4_direction" value="stationary" class="wave4" onclick="wave4.velocity = 0" checked>
+                    <span class="radiobtn4"></span>
+                </label>
+
+                <label class="radio_container">Forward
+                    <input autocomplete ="off" type="radio" id="forward4" name="wave4_direction" value="forward" class="wave4" onclick="wave4.velocity = 1">
+                    <span class="radiobtn4"></span>
+                </label>
+                <label class="radio_container">Reverse
+                    <input autocomplete ="off" type="radio" id="reverse4" name="wave4_direction" value="reverse" class="wave4" onclick="wave4.velocity = -1">
+                    <span class="radiobtn4"></span>
+                </label>
+            </div>
 
                 <div class="input-menu">
                     <p>Amplitude </p>
