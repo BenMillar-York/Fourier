@@ -1,9 +1,9 @@
 let fourierData = [];
 
-// Param: data - An array of Y - Coordinates.
+// Param: data - An array of Y Coordinates.
 // Return: freqArray - An array of Complex Numbers
 function discreteFourierTransform(data) {
-    // Computes the Fourier Transform in O(n^2) rather than O(N logN)
+    // Computes the Fourier Transform in O(N^2) rather than O(N logN)
     const numDataPoints = data.length;
     let freqArray = Array(data.length)
 
