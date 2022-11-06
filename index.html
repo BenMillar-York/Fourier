@@ -12,19 +12,19 @@
     <link rel="stylesheet" href="styles/checkbox.css">
     <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/radio.css">
-    <title>Fourier</title>
+    <title>Fourier Transform</title>
     <link rel="icon" type="image/png" href="https://www.york.ac.uk/static/stable/img/favicons/android-chrome-192x192.png"/>
 </head>
 <body onload="init()">
-    <div class="title"><h2>Discrete Fourier Transform Prototype</h2>
-            <h4>Hover over each wave menu to see it's sinusoidal component.</h4></div>
+    <div class="title"><h2>Discrete ℱourier Transform Prototype</h2>
+            <h4>Hover over each wave's menu to see its sinusoidal component.</h4></div>
     <canvas id="canvas"></canvas>
     <div class="menu">
 
         
 
         <div class="menu-box" id="wave1-menu">
-            <div style="margin-bottom: 5vh" onmouseover="addditionalWave=wave1" onmouseout="addditionalWave=null">
+            <div style="margin-bottom: 3vh" onmouseover="addditionalWave=wave1" onmouseout="addditionalWave=null">
                 <h3>Wave 1 </h3>
                 <div class="input-menu">
                     
@@ -45,11 +45,11 @@
 
                     <div class="input-menu">
                         <p>Amplitude </p>
-                        <input type="range" autocomplete="off" min="-200" max="200" value="78" class="slider Wave1slider" id="wave1-amplitude" oninput="wave1.amplitude = value" style="margin-left:10px">
+                        <input type="range" autocomplete="off" min="-200" max="200" value="84" class="slider Wave1slider" id="wave1-amplitude" oninput="wave1.amplitude = value" style="margin-left:10px">
                     </div>
                     <div class="input-menu">
                         <p>Frequency </p>
-                        <input type="range" autocomplete="off" min="0" max="0.05" value="0.0148907" step="0.0000001" class="slider Wave1slider" id="wave1-frequency" oninput="wave1.frequency = value" style="margin-left:10px">
+                        <input type="range" autocomplete="off" min="0" max="0.05" value="0.0053552" step="0.0000001" class="slider Wave1slider" id="wave1-frequency" oninput="wave1.frequency = value" style="margin-left:10px">
                     </div>
                     <div class="input-menu">
                         <p>Phase </p>
@@ -57,7 +57,7 @@
                     </div>
 
             </div>
-            <div class="spectrum-menu">
+            <div class="spectrum-menu" onmouseover="drawSamples=true" onmouseout="drawSamples=document.getElementById('samples_enabled').checked">
                 <h3>Frequency Spectrum</h3>
                 <div class="input-menu"><label>Sample Frequency</label>
                     <input type="range" autocomplete="off" min="0" max="1000" value="94" class="slider sampleSlider" id="sample-frequency-slider" >
@@ -66,7 +66,7 @@
                     <input type="range" autocomplete="off" min="0" max="20" value="0" class="slider sampleSlider" id="sample-frequency-slider" oninput="noise_thresold = value">
                 </div>
                 <label  class="input-menu checkbox_container">Display Sample Points
-                    <input type="checkbox" id="summation_enabled" name="summation_enabled" value="0" onclick="drawSamples=checked" >
+                    <input autocomplete="off" type="checkbox" id="samples_enabled" name="summation_enabled" value="0" onclick="drawSamples=checked" >
                     <span class="checkmark"></span>
                 </label >
 
@@ -98,17 +98,18 @@
 
                     <div class="input-menu">
                         <p>Amplitude </p>
-                        <input type="range" autocomplete="off" min="-200" max="200" value="43" class="slider Wave2slider" id="wave1-amplitude" oninput="wave2.amplitude = value" style="margin-left:10px">
+                        <input type="range" autocomplete="off" min="-200" max="200" value="38" class="slider Wave2slider" id="wave1-amplitude" oninput="wave2.amplitude = value" style="margin-left:10px">
                     </div>
                     <div class="input-menu">
                         <p>Frequency </p>
-                        <input type="range" autocomplete="off" min="0" max="0.05" value="0.0113251" step="0.0000001" class="slider Wave2slider" id="wave1-frequency" oninput="wave2.frequency = value" style="margin-left:10px">
+                        <input type="range" autocomplete="off" min="0" max="0.05" value="0.0155237" step="0.0000001" class="slider Wave2slider" id="wave1-frequency" oninput="wave2.frequency = value" style="margin-left:10px">
                     </div>
                     <div class="input-menu">
                         <p>Phase </p>
                         <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave2slider" id="wave1-phase" step="0.001" oninput="wave2.phase = value" style="margin-left:43px">
                     </div>
                 </div>
+
         </div>
         <div class="sign"><h1>+</h1></div>
         <div class="menu-box" id="wave3-menu" onmouseover="addditionalWave=wave3" onmouseout="addditionalWave=null">
@@ -133,51 +134,64 @@
 
                 <div class="input-menu">
                     <p>Amplitude </p>
-                    <input type="range" autocomplete="off" min="-200" max="200" value="0" class="slider Wave3slider" id="wave3-amplitude" oninput="wave3.amplitude = value" style="margin-left:10px">
+                    <input type="range" autocomplete="off" min="-200" max="200" value="38" class="slider Wave3slider" id="wave3-amplitude" oninput="wave3.amplitude = value" style="margin-left:10px">
                 </div>
                 <div class="input-menu">
                     <p>Frequency </p>
-                    <input type="range" autocomplete="off" min="0" max="0.05" value="0.0074863" step="0.0000001"  class="slider Wave3slider" id="wave3-frequency" oninput="wave3.frequency = value" style="margin-left:10px">
+                    <input type="range" autocomplete="off" min="0" max="0.05" value="0.0196812" step="0.0000001"  class="slider Wave3slider" id="wave3-frequency" oninput="wave3.frequency = value" style="margin-left:10px">
                 </div>
                 <div class="input-menu">
                     <p>Phase </p>
-                    <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave3slider" id="wave3-phase" step="0.001" oninput="wave3.phase = value" style="margin-left:43px">
+                    <input type="range" autocomplete="off" min="0" max="6.2831" value="1.403" class="slider Wave3slider" id="wave3-phase" step="0.001" oninput="wave3.phase = value" style="margin-left:43px">
                 </div>
 
         </div>
         <div class="sign"><h1>+</h1></div>
-        <div class="menu-box" id="wave4-menu" onmouseover="addditionalWave=wave4" onmouseout="addditionalWave=null">
-            <h3>Wave 4 </h3>
+        <div class="menu-box" id="wave4-menu">
+            <div onmouseover="addditionalWave=wave4" onmouseout="addditionalWave=null" style="margin-bottom: 3vh">
+                <h3>Wave 4 </h3>
 
-            <div class="input-menu">
-                    
-                <label class="radio_container">Stationary
-                    <input autocomplete ="off" type="radio" id="stationary4" name="wave4_direction" value="stationary" class="wave4" onclick="wave4.velocity = 0" checked>
-                    <span class="radiobtn4"></span>
-                </label>
+                <div class="input-menu">
+                        
+                    <label class="radio_container">Stationary
+                        <input autocomplete ="off" type="radio" id="stationary4" name="wave4_direction" value="stationary" class="wave4" onclick="wave4.velocity = 0" checked>
+                        <span class="radiobtn4"></span>
+                    </label>
 
-                <label class="radio_container">Forward
-                    <input autocomplete ="off" type="radio" id="forward4" name="wave4_direction" value="forward" class="wave4" onclick="wave4.velocity = 1">
-                    <span class="radiobtn4"></span>
-                </label>
-                <label class="radio_container">Reverse
-                    <input autocomplete ="off" type="radio" id="reverse4" name="wave4_direction" value="reverse" class="wave4" onclick="wave4.velocity = -1">
-                    <span class="radiobtn4"></span>
-                </label>
+                    <label class="radio_container">Forward
+                        <input autocomplete ="off" type="radio" id="forward4" name="wave4_direction" value="forward" class="wave4" onclick="wave4.velocity = 1">
+                        <span class="radiobtn4"></span>
+                    </label>
+                    <label class="radio_container">Reverse
+                        <input autocomplete ="off" type="radio" id="reverse4" name="wave4_direction" value="reverse" class="wave4" onclick="wave4.velocity = -1">
+                        <span class="radiobtn4"></span>
+                    </label>
+                </div>
+
+                    <div class="input-menu">
+                        <p>Amplitude </p>
+                        <input type="range" autocomplete="off" min="-200" max="200" value="24" class="slider Wave4slider" id="wave1-amplitude" oninput="wave4.amplitude = value" style="margin-left:10px">
+                    </div>
+   
+   
+                    <div class="input-menu">
+                        <p>Frequency </p>
+                        <input type="range" autocomplete="off" min="0" max="0.05" value="0.0011612" step="0.0000001"  class="slider Wave4slider" id="wave1-frequency" oninput="wave4.frequency = value" style="margin-left:10px">
+                    </div>
+                    <div class="input-menu">
+                        <p>Phase </p>
+                        <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave4slider" id="wave1-phase" step="0.001" oninput="wave4.phase = value" style="margin-left:43px">
+                    </div>
             </div>
+            <div class="spectrum-menu" onmouseover="showColours=true" onmouseout="showColours=document.getElementById('colours_enabled').checked">
+                <h3>Frequency Colours</h3>
+                <p>The colours shown are only a crude <br> aproximation of frequency content.</p>
+                <label  class="input-menu checkbox_container">Show colours on freqency graph
+                    <input type="checkbox" id="colours_enabled" name="colours_enabled" value="0" onclick="showColours=checked" checkedd>
+                    <span class="checkmark"></span>
+                </label >
 
-                <div class="input-menu">
-                    <p>Amplitude </p>
-                    <input type="range" autocomplete="off" min="-200" max="200" value="0" class="slider Wave4slider" id="wave1-amplitude" oninput="wave4.amplitude = value" style="margin-left:10px">
-                </div>
-                <div class="input-menu">
-                    <p>Frequency </p>
-                    <input type="range" autocomplete="off" min="0" max="0.05" value="0.0044672" step="0.0000001"  class="slider Wave4slider" id="wave1-frequency" oninput="wave4.frequency = value" style="margin-left:10px">
-                </div>
-                <div class="input-menu">
-                    <p>Phase </p>
-                    <input type="range" autocomplete="off" min="0" max="6.2831" value="0" class="slider Wave4slider" id="wave1-phase" step="0.001" oninput="wave4.phase = value" style="margin-left:43px">
-                </div>
+            </div>
 
         </div>
 

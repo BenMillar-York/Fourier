@@ -1,9 +1,10 @@
 let fourierData = [];
 
 
-function dft(){
-    const numDataPoints = sampleData.length;
-    let freqArray = Array(sampleData.length)
+function discreteFourierTransform(data) {
+    // Computes the Fourier Transform in O(n^2) rather than O(N logN)
+    const numDataPoints = data.length;
+    let freqArray = Array(data.length)
 
     for (let frequency = 0; frequency < numDataPoints; frequency++) {
 
@@ -11,11 +12,13 @@ function dft(){
 
         for (let n = 0; n < numDataPoints; n++) {
 
-            const currentAmplitude = sampleData[n];
+            let amplitude = data[n];
 
-            const theta = -2 * pi * frequency * (n/numDataPoints);
+            let exponent = -2 * pi * frequency * (n/numDataPoints);
 
-            let contribution = new Complex(Math.cos(theta) * currentAmplitude, Math.sin(theta) * currentAmplitude);
+            /* As cos x = Re (e^jx)
+                & sin x = Im (e^jx)*/
+            let contribution = new Complex(amplitude * Math.cos(exponent), amplitude * Math.sin(exponent));
 
             frequencySignal = addComplex(frequencySignal, contribution);
 

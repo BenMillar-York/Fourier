@@ -9,6 +9,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin-top: 1vh;
   }
   
 .checkbox_container input {

@@ -16,6 +16,7 @@ class Complex {
 
 function multiplyComplex(Complex1, Number2) {
     if (typeof Number2 == Complex){
+        // (a + bi)(c + di) = ((ac + bd) + (ad+bc)j)
         let real1 = Complex1.real * Number2.real;
         let imag1 = Complex1.real * Number2.imag;
         let imag2 = Complex1.imag * Number2.real;
@@ -33,6 +34,8 @@ function multiplyComplex(Complex1, Number2) {
 
 function divideComplex(Complex1, Number2) {
     if (typeof Number2 == Complex){
+        // (a + bi)/(c + di) = (((ac + bd)/(c^2 + d^2)) + ((bc - ad)/(c^2 + d^2))j)
+        // Maybe turning this into polar form would have been easier
         let real1 = Complex1.real * Number2.real;
         let imag1 = Complex1.real * Number2.imag;
         let imag2 = Complex1.imag * Number2.real;

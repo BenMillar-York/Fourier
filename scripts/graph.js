@@ -12,8 +12,8 @@ function drawAxes(ctx, drawLower=true) {
     let gradient = ctx.createLinearGradient(width/2, 0, width/2, height);
     if (drawLower) {
         gradient.addColorStop(0, "rgb(128,128,128,0)");
-        gradient.addColorStop(0.1, "rgb(128,128,128,0)");
-        gradient.addColorStop(0.3, "rgb(128,128,128,255)");
+        gradient.addColorStop(0.05, "rgb(128,128,128,0)");
+        gradient.addColorStop(0.15, "rgb(128,128,128,255)");
         gradient.addColorStop(0.8, "rgb(128,128,128,255)");
         gradient.addColorStop(0.95, "rgb(128,128,128,0)");
         gradient.addColorStop(1, "rgb(128,128,128,0)");
@@ -50,6 +50,7 @@ function drawAxes(ctx, drawLower=true) {
 }
 
 const FREQUENCY_GRAPH_OFFSET = 30
+const WAVE_SCALING_FACTOR = 0.8
 
 function drawOffsetAxes(ctx) {
     var width = ctx.canvas.width;
@@ -85,7 +86,7 @@ function plotFunction(ctx, wave, colour) {
 
     for (let x = -width/2; x < width/2; x++) {
 
-        y = - wave.getPositionAtTime(x, width);
+        y = - wave.getPositionAtTime(x, width)*WAVE_SCALING_FACTOR;
 
         ctx.lineTo(x+(width/2), y + (height/2));
     }
@@ -113,7 +114,7 @@ function drawSamplingPoints(ctx, wave, sampleFrequency){
     for (let x = -width/2; x < width/2; x+= sampleRate) {
 
         let waveAmplitude = wave.getPositionAtTime(x, width)
-        y = - waveAmplitude + (height/2);
+        y = - waveAmplitude*WAVE_SCALING_FACTOR + (height/2);
 
         sample = y;
         sampleData.push(sample);
@@ -143,9 +144,6 @@ function updateTimeGraph() {
     if (addditionalWave instanceof Wave) {
         plotFunction(context, addditionalWave, addditionalWave.colour)
     }
-
-    
-    fourierData = dft()
 
     let sampleFrequency = document.getElementById("sample-frequency-slider").value;
     drawSamplingPoints(context, sumWave, sampleFrequency);
@@ -212,6 +210,7 @@ function drawArrow(ctx, x, y, upsidedown, size) {
     }
 }*/
 
+let showColours = true;
 function plotFrequencyPoints2(ctx, data){
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
@@ -252,11 +251,11 @@ function plotFrequencyPoints2(ctx, data){
     let largestFreqs = [];
     for (let i = 1; i < data.length/2; i++) {
         let pointAmplitude = data[i].real;
-        if (Math.abs(pointAmplitude) > 10) {
+        if (Math.abs(pointAmplitude) > 5) {
             if (largestFreqs.length == 0) {
                 largestFreqs.push(i);
             }
-            if (i > largestFreqs[largestFreqs.length - 1] + 5){
+            if (i > largestFreqs[largestFreqs.length - 1] + (sampleData.length/100)){
                 largestFreqs.push(i);
             }
             
@@ -267,7 +266,7 @@ function plotFrequencyPoints2(ctx, data){
 
 
     for (let i=0; i < freqArr.length; i++){
-        if (largestFreqs.length > 0 && Math.abs(waveArr[waveArr.length-i-1].amplitude) > 3) {
+        if (largestFreqs.length > 0 && Math.abs(waveArr[waveArr.length-i-1].amplitude) > 0 && Math.abs(waveArr[waveArr.length-i-1].frequency) > 0) {
             let xPos = largestFreqs[largestFreqs.length-i-1]/data.length;
             if (typeof xPos == "" || xPos == NaN) {
                 return;
@@ -284,8 +283,12 @@ function plotFrequencyPoints2(ctx, data){
     /*drawCross(ctx, largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)
     drawCross(ctx, width-largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)*/
 
-    ctx.strokeStyle = gradient
-
+    if (showColours) {
+        ctx.strokeStyle = gradient;
+    } else {
+        ctx.strokeStyle = "rgb(128,128,128)";
+    }
+    
     
     i = 0;
     for (let x = -width/2; x < width/2; x+= sampleRate) {
@@ -307,7 +310,7 @@ function plotFrequencyPoints2(ctx, data){
 function updateFrequencyGraph() {
     var canvas = document.getElementById("fourier");
     document.getElementById("fourier").width = window.innerWidth;
-    document.getElementById("fourier").height = window.innerHeight/4;
+    document.getElementById("fourier").height = window.innerHeight/3.7;
 
     var context = canvas.getContext("2d");
 
@@ -315,7 +318,7 @@ function updateFrequencyGraph() {
     drawAxes(context, false);
     context.save();
 
-    fourierData = dft();
+    fourierData = discreteFourierTransform(sampleData);
 
     plotFrequencyPoints2(context, fourierData);
 
@@ -340,10 +343,10 @@ function init() {
     window.requestAnimationFrame(updateFrequencyGraph);
 
 
-    wave1 = new SineWave(78, 0.0148907, 1.304, 0, waveColours[0]);
-    wave2 = new SineWave(98, 0.0113251, 0, 0, waveColours[1]);
-    wave3 = new SineWave(65, 0.0074863, 1.403, 0, waveColours[2]);
-    wave4 = new SineWave(72, 0.0044672, 0, 0, waveColours[3]);
+    wave1 = new SineWave(84, 0.0053552, 1.304, 0, waveColours[0]);
+    wave2 = new SineWave(38, 0.0155237, 0, 0, waveColours[1]);
+    wave3 = new SineWave(83, 0.0196812, 1.403, 0, waveColours[2]);
+    wave4 = new SineWave(24, 0.0011612, 0, 0, waveColours[3]);
 
     sumWave = new SumWave([wave1, wave2, wave3, wave4]);
 
