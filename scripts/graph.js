@@ -210,7 +210,7 @@ function drawArrow(ctx, x, y, upsidedown, size) {
     }
 }*/
 
-let showColours = false;
+let showColours = true;
 function plotFrequencyPoints2(ctx, data){
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
