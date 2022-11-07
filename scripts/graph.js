@@ -210,7 +210,7 @@ function drawArrow(ctx, x, y, upsidedown, size) {
     }
 }*/
 
-let showColours = true;
+let showColours = false;
 function plotFrequencyPoints2(ctx, data){
     var width = ctx.canvas.width;
     var height = ctx.canvas.height;
@@ -248,16 +248,24 @@ function plotFrequencyPoints2(ctx, data){
         }
     })
 
+
+
     let largestFreqs = [];
+    
     for (let i = 1; i < data.length/2; i++) {
-        let pointAmplitude = data[i].real;
-        if (Math.abs(pointAmplitude) > 5) {
+        let pointAmplitude = data[i].magnitude;
+        if (Math.abs(pointAmplitude) > 1) {
             if (largestFreqs.length == 0) {
                 largestFreqs.push(i);
             }
-            if (i > largestFreqs[largestFreqs.length - 1] + (sampleData.length/100)){
+            if (pointAmplitude > data[i-1].magnitude && pointAmplitude > data[i+1].magnitude) {
                 largestFreqs.push(i);
             }
+            /*if (i > largestFreqs[largestFreqs.length - 1] + (sampleData.length/20)){
+                largestFreqs.push(i);
+            } else if (pointAmplitude > largestFreqs[largestFreqs.length - 1]) {
+                largestFreqs.push(i);
+            }*/
             
         }
     }
@@ -281,7 +289,16 @@ function plotFrequencyPoints2(ctx, data){
     }
 
     /*drawCross(ctx, largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)
-    drawCross(ctx, width-largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)*/
+    drawCross(ctx, width-largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)
+
+    drawCross(ctx, largestFreqs[largestFreqs.length-2]/data.length*width, 40, 5)
+    drawCross(ctx, width-largestFreqs[largestFreqs.length-2]/data.length*width, 40, 5)
+
+    drawCross(ctx, largestFreqs[largestFreqs.length-3]/data.length*width, 40, 5)
+    drawCross(ctx, width-largestFreqs[largestFreqs.length-3]/data.length*width, 40, 5)
+
+    drawCross(ctx, largestFreqs[largestFreqs.length-4]/data.length*width, 40, 5)
+    drawCross(ctx, width-largestFreqs[largestFreqs.length-4]/data.length*width, 40, 5)*/
 
     if (showColours) {
         ctx.strokeStyle = gradient;
@@ -292,7 +309,7 @@ function plotFrequencyPoints2(ctx, data){
     
     i = 0;
     for (let x = -width/2; x < width/2; x+= sampleRate) {
-        let pointAmplitude = data[i].real;
+        let pointAmplitude = data[i].magnitude;
         let y = -Math.abs(pointAmplitude*10) + (height);
         
         if (Math.abs(pointAmplitude) >= noise_thresold) {
