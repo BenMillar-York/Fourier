@@ -177,7 +177,7 @@ function drawArrow(ctx, x, y, upsidedown, size) {
     ctx.save();
 }
 
-function getFrequencyColourGradient(ctx) {
+function getFrequencyColourGradient(ctx, data, width, height) {
     let freqArr = [wave1.frequency, wave2.frequency, wave3.frequency, wave4.frequency]
 
     freqArr.sort();
@@ -267,13 +267,14 @@ function plotFrequencyPoints(ctx, data){
 
 
     if (showColours) {
-        ctx.strokeStyle = getFrequencyColourGradient(ctx);
+        ctx.strokeStyle = getFrequencyColourGradient(ctx, data, width, height);
     } else {
         ctx.strokeStyle = "rgb(128,128,128)";
     }
     
-    for (let x = 0; x < width; x+= sampleRate) {
-        let pointAmplitude = data[x].magnitude;
+    let i = 0;
+    for (let x = 0; x < width-1; x+= sampleRate) {
+        let pointAmplitude = data[i].magnitude;
         let y = -Math.abs(pointAmplitude*10) + (height);
         
         if (Math.abs(pointAmplitude) >= noise_thresold) {
@@ -284,6 +285,7 @@ function plotFrequencyPoints(ctx, data){
             ctx.lineTo(x, height);
             ctx.stroke();
         }
+        i++;
     }
 }
 

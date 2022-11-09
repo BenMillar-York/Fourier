@@ -41,18 +41,19 @@ class SineWave extends Wave {
 }
 
 class SquareWave extends Wave {
-    constructor(amplitude, frequency, phase){
-        super(amplitude, frequency, phase);
+    constructor(amplitude, frequency, phase, velocity, colour){
+        super(amplitude, frequency, phase, colour);
         this.amplitude = amplitude;
         this.frequency = frequency; // Hz
         this.phase = phase; // Radians
+        this.velocity = velocity;
     }
 
     getPositionAtTime(time){
         let amplitude = this.amplitude;
         let omega = 2*Math.PI*this.frequency;
         let phase = this.phase;
-        return amplitude * ceiling(Math.cos(omega*time-phase));
+        return amplitude * ceiling(Math.cos(omega*time-(position*this.velocity)-phase));
     }
 }
 
