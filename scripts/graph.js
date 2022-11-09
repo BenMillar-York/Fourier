@@ -1,4 +1,7 @@
 const waveColours = ["#238636", '#38a6ff', '#ff7846', '#4c32a8']
+const FREQUENCY_GRAPH_OFFSET = 30
+const WAVE_SCALING_FACTOR = 0.8
+
 let noise_thresold = 0;
 
 function drawAxes(ctx, drawLower=true) {
@@ -40,17 +43,8 @@ function drawAxes(ctx, drawLower=true) {
         ctx.moveTo(xMin, height);
         ctx.lineTo(width, height);
     }
-
-
-    ctx.stroke();
-
-
-    
     ctx.stroke();
 }
-
-const FREQUENCY_GRAPH_OFFSET = 30
-const WAVE_SCALING_FACTOR = 0.8
 
 function drawOffsetAxes(ctx) {
     var width = ctx.canvas.width;
@@ -183,50 +177,7 @@ function drawArrow(ctx, x, y, upsidedown, size) {
     ctx.save();
 }
 
-/*function plotFrequencyPoints(ctx, data) {
-    var width = ctx.canvas.width;
-    var height = ctx.canvas.height;
-
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "#FF00FF";
-    
-    for (let i = 1; i < data.length; i++) {
-        
-        let pointAmplitude = data[i].real;
-        
-        let x = i * width/data.length;
-
-        let y = pointAmplitude*4 + (height/2);
-
-        if (Math.abs(pointAmplitude) > noise_thresold) {
-            drawArrow(ctx, x, y, y > height/2, 5);
-            
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x, height/2);
-            ctx.stroke();
-        }
-        
-    }
-}*/
-
-let showColours = true;
-function plotFrequencyPoints2(ctx, data){
-    var width = ctx.canvas.width;
-    var height = ctx.canvas.height;
-
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#ad3184";
-    
-    var y = 0;
-
-    let sampleFrequency = document.getElementById("sample-frequency-slider").value;
-    let sampleRate = width/sampleFrequency;
-
-    let i = 0
-
-    //let gradient = ctx.createLinearGradient(0, 0, width, 0);
-
+function getFrequencyColourGradient(ctx) {
     let freqArr = [wave1.frequency, wave2.frequency, wave3.frequency, wave4.frequency]
 
     freqArr.sort();
@@ -288,6 +239,9 @@ function plotFrequencyPoints2(ctx, data){
 
     }
 
+    return gradient;
+
+
     /*drawCross(ctx, largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)
     drawCross(ctx, width-largestFreqs[largestFreqs.length-1]/data.length*width, 40, 5)
 
@@ -299,28 +253,37 @@ function plotFrequencyPoints2(ctx, data){
 
     drawCross(ctx, largestFreqs[largestFreqs.length-4]/data.length*width, 40, 5)
     drawCross(ctx, width-largestFreqs[largestFreqs.length-4]/data.length*width, 40, 5)*/
+}
+
+let showColours = true;
+function plotFrequencyPoints(ctx, data){
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+
+    ctx.lineWidth = 3;
+
+    let sampleFrequency = document.getElementById("sample-frequency-slider").value;
+    let sampleRate = width/sampleFrequency;
+
 
     if (showColours) {
-        ctx.strokeStyle = gradient;
+        ctx.strokeStyle = getFrequencyColourGradient(ctx);
     } else {
         ctx.strokeStyle = "rgb(128,128,128)";
     }
     
-    
-    i = 0;
-    for (let x = -width/2; x < width/2; x+= sampleRate) {
-        let pointAmplitude = data[i].magnitude;
+    for (let x = 0; x < width; x+= sampleRate) {
+        let pointAmplitude = data[x].magnitude;
         let y = -Math.abs(pointAmplitude*10) + (height);
         
         if (Math.abs(pointAmplitude) >= noise_thresold) {
-            drawArrow(ctx, x+ (width/2), y, y > height, 6);
+            drawArrow(ctx, x, y, y > height, 6);
                 
             ctx.beginPath();
-            ctx.moveTo(x+ (width/2), y);
-            ctx.lineTo(x+ (width/2), height);
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, height);
             ctx.stroke();
         }
-        i = i + 1;
     }
 }
 
@@ -337,7 +300,7 @@ function updateFrequencyGraph() {
 
     fourierData = discreteFourierTransform(sampleData);
 
-    plotFrequencyPoints2(context, fourierData);
+    plotFrequencyPoints(context, fourierData);
 
     context.restore();
     
