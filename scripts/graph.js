@@ -110,8 +110,8 @@ function drawSamplingPoints(ctx, wave, sampleFrequency){
         let waveAmplitude = wave.getPositionAtTime(x, width)
         y = - waveAmplitude*WAVE_SCALING_FACTOR + (height/2);
 
-        sample = y;
-        sampleData.push(sample);
+
+        sampleData.push(waveAmplitude);
         
         if (drawSamples) {
             drawCross(ctx, x+width/2, y, 4);
@@ -275,7 +275,7 @@ function plotFrequencyPoints(ctx, data){
     let i = 0;
     for (let x = 0; x < width-1; x+= sampleRate) {
         let pointAmplitude = data[i].magnitude;
-        let y = -Math.abs(pointAmplitude*10) + (height);
+        let y = -Math.abs(pointAmplitude*2.3) + (height);
         
         if (Math.abs(pointAmplitude) >= noise_thresold) {
             drawArrow(ctx, x, y, y > height, 6);

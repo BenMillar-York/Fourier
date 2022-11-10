@@ -9,7 +9,7 @@ class Complex {
     }
 
     get magnitude () {
-        return Math.sqrt(this.real**2, this.imag**2);
+        return Math.sqrt(this.real**2 + this.imag**2);
     }
 
 }
